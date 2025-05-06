@@ -1,0 +1,31 @@
+1. Basic Linear Model
+A standard lienar regression model that treats all features independently, 
+missing the important interactions in the data 
+
+2. Manual Feature Crossing
+We created two critical crossed features:
+sqft_x_neighbourhood:  Captures how squar footage value varies by location
+sqft_x_age: Captures how newer homes command higher price per square footage
+These manual crosses greatly improve model performance because they align with the true relationships,
+in the data.
+
+3. Automated Polynomial Feature Crossing
+Using PolynomialFeatures(degree=2, interaction_only=True)to automatically generate all possible pairwise
+feature interactions, letting the model determine which ones are important.
+
+** When to use feature Crossing **
+Feature Crossing is particularly valuable when:
+1. Working with linear models - that can capture nonlinear relationships
+2. Domain knowledge suggests interactions - exist between features
+3. Vizualisations show different slopes - when plotting one feature against the target at different levels
+of another feature.
+4. Working with geographical data - where location specific effects are important
+5. Time-based features - interact with other variables (e.g seasonal effects)
+
+** Implementation tips **
+1. Start with domain knowledge - to identify likely important interactions
+2. Visualize relationships - to spot potenital interactions before coding them
+3. Use automated feature crossing judiciously - it can create a large number of features
+4. Regularisation - is important when using crossed featues to prevent overfitting
+
+
