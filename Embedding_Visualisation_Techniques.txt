@@ -1,0 +1,11 @@
+Embedding visualisation techniques involve visualising high dimensional embeddings,
+a crucial skill for understanding complex data representations in modern data science.
+
+Embeddings are dense vector representations of data that capture scemantic relationships in a 
+lower dimensional space. Whether you're working with word embeddings in NLP, user embeddings 
+in recommendation systems, or image embeddings in computer vision, visualising these representations
+can provide invaluable insights.
+
+Why Embedding Visualisation Matters?
+Embeddings typically exist in spaces with dozens to hundreds of dimensions, making them impossible
+to visualize directly. However, proper visualisation techniques can helps 
