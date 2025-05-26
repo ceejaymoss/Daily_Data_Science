@@ -8,4 +8,26 @@ can provide invaluable insights.
 
 Why Embedding Visualisation Matters?
 Embeddings typically exist in spaces with dozens to hundreds of dimensions, making them impossible
-to visualize directly. However, proper visualisation techniques can helps 
+to visualize directly. However, proper visualisation techniques can help you:
+
+1. Discover natural clusters in your data
+2. Identify ourliers and anomalies
+3. Validate that similar items are embedded close together
+4. Debug your embedding process
+5. Communicate patterns to non-technical stakeholders
+
+Key Visualisation Techniques
+The most effective techniques for embedding visualisation includes:
+
+t-SNE (t-distributed stochastic neighbour embedding): Excellent for preserving local neighbourhoods 
+and revealing clusters
+
+UMAP (Uniform Manifold Approximation and Projection): Better preservation of global structure than 
+t-SNE, with faster computation
+
+PCA(Principal Component Analysis): Simple but effective for initial exploration,
+preserves global variance.
+
+Interactive 3D visualisations: Can reveal more structure than 2D plots while remaining interpretable.
+
+
