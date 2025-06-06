@@ -30,3 +30,49 @@ of 15 features that were consistently predictive across all methods, leading to 
 
 The beauty of this approach is that it not only improves performance but also increases confidence in your feature choices
 crucial when you need to explain model decisions to stakeholders.
+
+Test case formula output:
+               test_accuracy  cv_accuracy  n_features
+f_classif             0.9357       0.9624        10.0
+mutual_info           0.9357       0.9624        10.0
+lasso                 0.9708       0.9674        10.0
+rf_importance         0.9298       0.9624         9.0
+rfe_logistic          0.9708       0.9799        10.0
+ensemble              0.9357       0.9624        10.0
+
+Looking at this feature selection comparison, here are the key insights:
+
+Performance Rankings:
+
+RFE with Logistic Regression - is the clear winner with the highest CV accuracy (97.99%)
+and strong test accuracy (97.08%)
+
+Lasso - performs second best with high test accuracy (97.08%) and good CV accuracy (96.74%)
+
+The other methods - (f_classif, mutual_info, ensemble) cluster together with identical performance
+(93.57% test, 96.24% CV)
+
+Key Observtions:
+
+Overfitting Concerns - Most methods show higher CV accuracy than test accuracy, which is expected,
+but the gap varies. f_classif, mutual_info, and ensemble show a larger gap (3% difference), suggesting
+potential overfitting.
+
+Feature Efficiency - Random forest importance achieved competitive performance using only 9 features
+instead of 10, indictating it identified one redundant feature while maintaining model quality.
+
+Method Reliability: RFE with logisitc regression shows the smallest performance gap between CV and 
+test sets, suggesting more robust feature selection and better generalisation.
+
+Practical Implementation:
+
+Go with RFE + Logistic Regression - for your final model - it shows the best cross-validation
+performance and good generalisation.
+
+Consider Lasso backup - nearly identical test performance with potentially simpler interpretation.
+
+Investigate the RF importance result - understanding which feature it excluded could provide domain
+insights.
+
+The consistency accross multiple methods at the 96-97% range suggests your feature set is generally 
+predictive, and the problem is well suited to these ML approaches. 

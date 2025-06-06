@@ -1,0 +1,22 @@
+Most data scientists default to random train/test splits, 
+but this creates data leakage when working with time-dependant data. 
+Instead, use techinques like:
+
+Time Series Split: Train on past data, validate on future periods.
+
+Blocked - Cross Validation: Create temporal blocks with gaps between train/validation to
+simulate real deployment conditions.
+
+Purged Cross-Validation: Remove observations close to the validation period 
+to prevent look-ahead bias.
+
+The key insights are your model needs to prove it can predict the future only using the past
+information - just like it will in production. A model that achieves 95% accuracy with random
+splits might drop to 60% with proper temporal validation, revealing its true performance.
+
+PRO TIP: Always plot your validation scores over time. If performance degrade in recent periods,
+your model might be learning patterns that no longer hold - a common issue in financial markets,
+user behaviour, and evolving systems.
+
+This single change in validation strategy often reveals which models will actaully work in the 
+real world versus those that just memorize historical coincidences.
