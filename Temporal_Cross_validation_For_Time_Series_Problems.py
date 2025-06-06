@@ -4,63 +4,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 
-def time_series_cv(X, y, n_splits=5, test_size=30, gap=5, min_train_size=100):
-    """
-    Time series cross-validation with gap to prevent data leakage
-    
-    Parameters:
-    - X, y: Features and target (must be time-ordered)
-    - n_splits: Number of CV folds
-    - test_size: Size of each test set
-    - gap: Gap between train/test to prevent leakage
-    - min_train_size: Minimum training set size
-    """
-    n_samples = len(X)
-    scores = []
-    fold_info = []
-    
-    # Calculate fold boundaries
-    max_test_start = n_samples - test_size
-    min_test_start = min_train_size + gap
-    
-    test_starts = np.linspace(min_test_start, max_test_start, n_splits, dtype=int)
-    
-    for i, test_start in enumerate(test_starts):
-        # Define splits with gap
-        train_end = test_start - gap
-        test_end = test_start + test_size
-        
-        if train_end < min_train_size:
-            continue
-            
-        # Create train/test indices
-        train_idx = np.arange(0, train_end)
-        test_idx = np.arange(test_start, min(test_end, n_samples))
-        
-        # Split data
-        X_train, X_test = X.iloc[train_idx], X.iloc[test_idx]
-        y_train, y_test = y.iloc[train_idx], y.iloc[test_idx]
-        
-        # Train model and predict
-        model = LinearRegression()
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
-        
-        # Calculate score
-        score = mean_squared_error(y_test, y_pred, squared=False)  # RMSE
-        scores.append(score)
-        
-        fold_info.append({
-            'fold': i+1,
-            'train_size': len(train_idx),
-            'test_size': len(test_idx),
-            'train_period': (train_idx[0], train_idx[-1]),
-            'test_period': (test_idx[0], test_idx[-1]),
-            'rmse': score
-        })
-    
-    return scores, fold_info
-
 # Example usage with sample time series data
 np.random.seed(42)
 dates = pd.date_range('2020-01-01', periods=500, freq='D')
