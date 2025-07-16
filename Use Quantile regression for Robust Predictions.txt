@@ -1,0 +1,63 @@
+Use Quantile Regression for Robust Predictions
+
+Instead of always defaulting to mean-based regression (like linear regression), 
+consider quantile regression when you need to understand the full distribution of your target 
+variable or when your data has outliers.
+
+Why it matters:
+
+- Standard regression gives you the conditional mean, but quantile regression gives you any percentile
+(like the 10th, 50th, or 90th percentile)
+- It's robust to outliers since it doesn't rely on minimizing squared errors.
+- Perfect for risk assessment, demand forecasting, and any scenario where you need predicition intervals
+
+Quick implementation:
+
+from sklearn.linear_model import QuantileRegressor
+import numpy as np 
+
+# Predict the 10th, 50th and 90th percentiles
+quantiles = [0.1, 0.5, 0.9]
+predictions = {}
+
+for q in quantiles:
+    model = QuantileRegressor(quantile=q, alpha=0.01)
+    model.fit(X_train, y_train)
+    predictions[f'q{int(q*100)}'] = model.predict(X_test)
+
+Real-world example: 
+
+Instead of predicting "average house price will be $300k," you can say
+"there's a 10% chance the price will be below $250k, 50% chance below $300k,
+and 90% chance below $380k."
+
+This gives stakeholders much richer information for decision-making than a point 
+estimate alone.
+
+Quantile Regression Mathematical Foundation
+
+Standard Linear Regression:
+
+- Minimizes: SUM(y_i - yhat_i)^2
+- Finds: Conditional mean E[Y|X]
+
+Qunatile Regression:
+
+- Minimizes: SUM pt(y_i - yhat_i) where pt is the "check function"
+- Finds: Conditional quantile Qt(Y|X)
+
+The Check Function (pt):
+
+pt(u) = u(t - I(u < 0))
+
+Where:
+
+t = desired quantile (e.g 0.5 for median)
+I(u < 0) = indicator function (1 if u < O, else O)
+
+What this means:
+
+For positive residuals: loss = u * t 
+For negative residuals: loss = u * (t - 1)
+This asymmetric loss function pulls the regression line toward the desired quantile
+
