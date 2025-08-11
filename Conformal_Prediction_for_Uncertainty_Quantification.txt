@@ -1,0 +1,35 @@
+Master Conformal Prediction for Uncertainty Quantification
+
+While most ML models give you point predictions, conformal prediction provides
+mathematically guaranteed prediction intervals with exact coverage probabilities
+- no distributional assumptions required.
+
+Why it's powerful:
+    - Works with ANY underlying model (XGBoost, neural nets, etc.)
+    - Provides finite-sampe guarantees (not just asymptotic)
+    - Distribution-free - no assumptions about your data
+    - Gives you exact coverage: if you want 90% intervals, you get exactly 90% coverage
+
+The Core Idea:
+    1. Train your model on training data
+    2. Calculate "conformity scores" on a calibration set (how wrong was each prediction?)
+    3. Use these scores to create prediction intervals for new data
+
+The Magic:
+    Even when your underlying model is completely wrong (like fitting a linear
+    model to non-linear data), conformal prediction still gives you valid uncertainty
+    estimates. The coverage guarantee holds regardless of model quality.
+
+Real -  World applications:
+    - Medical diagnosis: "90% confidence this patient's risk is between X and Y"
+    - Financial forecasting: Regulatory -  compliant risk estimates
+    - Autonomous vehicles: Safety - critical predictions with guarantees
+    A/B testing: Reliable confidence intervals for conversion rates
+
+Pro tip:
+    Use different conformity scores for different types of uncertainty - 
+    absolute residuals for additive noise, relative residuals for multiplicative 
+    noise, or even learned conformity sores with neural networks!
+
+    This is becoming essential in high-stakes ML where "trust but verify" isn't enough
+    - you need mathematical guarantess.
