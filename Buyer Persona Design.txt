@@ -1,0 +1,21 @@
+Key feature engineering principles for buyer personas:
+
+1. Ratios > Raw Counts: Return rate reveals more than total returns
+2. Context Matters: $1000 spent means different things for different income levels
+3. Temporal patterns: How consistent is behaviour over time?
+4. Multi-Dimensional Value: Not just monetary - consider engagement, virality and satifaction
+5. Diversity Metrics: Shannon entropy and Herfingdahl indxe reveal shopping sophistication
+
+Advanced techniques to try:
+NLP on customer service tickets -> sentiment features
+Seasonality extraction -> purchase timing patterns
+Network features -> social influence scores from referral graphs
+Sequence mining -> common purchase path patterns
+Anomaly scores -> unusual behaviour detection
+
+Pro tip: when clustering, use a mix of features from different categories
+to avoid creating personas that only vary in one dimension (e.g only by spend leve).
+The richest personas combine demographics, behavioural and value-based characteristics!
+
+
+
